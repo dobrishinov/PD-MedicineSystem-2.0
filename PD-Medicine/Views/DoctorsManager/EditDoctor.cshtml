@@ -1,0 +1,58 @@
+﻿@using DataAccess.Entity;
+.
+@{
+    ViewBag.Title = "Add/Edit Doctor";
+}
+
+<h1 style="font-size:26px;">Add/Edit Doctor</h1>
+<hr />
+
+            @{
+                DoctorEntity doctor = (DoctorEntity)ViewData["doctor"];
+            }
+            <form action="/DoctorsManager/EditDoctor" method="post">
+                <input type="hidden" name="Id" value="@doctor.Id" />
+                <input type="hidden" name="UserStatus" value="True" />
+
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" name="FirstName" value="@doctor.FirstName" placeholder="Add First Name" />
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" name="LastName" value="@doctor.LastName" placeholder="Add Last Name" />
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" name="Username" value="@doctor.Username" placeholder="Add Username" />
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="Password" value="@doctor.Password" placeholder="Add Password" />
+                </div>
+
+                <div class="form-group">
+                    <label for="doctorType">Doctor Type</label>
+                    <input type="text" class="form-control" name="DoctorType" value="@doctor.DoctorType" placeholder="Add Doctor Type" />
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" class="form-control" name="Description" value="@doctor.Description" placeholder="Add Description" />
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" name="Address" value="@doctor.Address" placeholder="Add Address" />
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="form-control" name="Phone" value="@doctor.Phone" placeholder="Add Phone" />
+                </div>
+
+                <input class="btn btn-success" type="submit" value="Save" />&nbsp;<a class="btn btn-danger" href="/DoctorsManager/Index">Cancel</a>
+            </form>

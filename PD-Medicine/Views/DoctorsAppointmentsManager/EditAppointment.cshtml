@@ -1,0 +1,38 @@
+﻿@using DataAccess.Entity;
+.
+@{
+    ViewBag.Title = "Request Manager";
+}
+@{
+    AppointmentEntity appointment = (AppointmentEntity)ViewData["appointment"];
+}
+
+    <br />
+    <br />
+    <p style="font-size:26px;"><span style="font-size:26px;">Appointment for:</span> <span style="color:#303030">@appointment.Username</span></p>
+    <hr />
+            <form action="/DoctorsAppointmentsManager/EditAppointment" method="post" class="form-group">
+                <input type="hidden" name="Id" value="@appointment.Id" />
+                <input type="hidden" name="UserId" value="@appointment.UserId" />
+                <input type="hidden" name="DoctorId" value="@appointment.DoctorId" />
+                <input type="hidden" name="Username" value="@appointment.Username" />
+
+                <div class="form-group">
+                    <label for="symptoms">Symptoms</label>
+                    <input type="text" class="form-control" name="Symptoms" value="@appointment.Symptoms" placeholder="Add your symptoms" />
+                </div>
+
+                <div class="form-group">
+                    <label for="dateHour">Date and Hour</label>
+                    <input type="text" class="form-control" id="datetimepicker" name="DateHour" value="@appointment.DateHour" placeholder="Choose Day and Hour">
+                </div>
+
+                <div class="form-group">
+                    <label for="acceptAppointments">Accept Appointments:</label>
+                    <br />
+                    <label class="checkbox-inline">&nbsp; @Html.CheckBox("Status", false) Accept</label>
+                </div>
+
+                <input class="btn btn-success" type="submit" value="Save" />&nbsp;<a class="btn btn-danger" href="/DoctorsAppointmentsManager/Index">Cancel</a>
+
+            </form>

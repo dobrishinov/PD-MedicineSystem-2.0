@@ -1,0 +1,38 @@
+﻿@using DataAccess.Entity;
+.
+@{
+    ViewBag.Title = "Registration";
+}
+    <h1 style="font-size:26px;">Registration for patients</h1>
+    <hr />
+    
+            @{
+                UserEntity user = (UserEntity)ViewData["user"];
+            }
+            <form action="/Registration/Register" method="post">
+                <input type="hidden" name="Id" value="@user.Id" />
+                <input type="hidden" name="UserStatus" value="False" />
+
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" name="FirstName" value="@user.FirstName" placeholder="Add your First Name" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" name="LastName" value="@user.LastName" placeholder="Add your Last Name" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" name="Username" value="@user.Username" placeholder="Add your Username" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="Password" value="@user.Password" placeholder="Add your Password" required />
+                </div>
+
+                <input class="btn btn-success" type="submit" value="Register" />
+
+            </form>

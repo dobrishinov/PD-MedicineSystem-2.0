@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron col-md-8 center-block">
+    <img class="logo img-responsive" src="~/images/logo.png" alt="Alternate Text" />
+    <h1 class="text-center">PD-Medicine</h1>
+    <p class="lead text-center">Online registry for patients who want to make an appointment with their local doctor.</p>
+    <p><a href="/Registration/Register" class="btn btn-primary btn-lg pull-right">Register Patient &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Request an appointment</h2>
+        <p>
+            Request an appointment with a doctor. Write your medical symptoms, choose hour and doctor, easy and fast!
+        </p>
+        <p><a class="btn btn-default" href="/AppointmentsManager/EditAppointment">Request NOW &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>About</h2>
+        <p>Every event need safety coverage. PD-medicine provides First Aid and Medical Standby coverage for a wide range of events. We can support relatively low-risk events such as corporate function, product launches to more high-risk events such as Marathons, Triathlons etc. </p>
+        <p><a class="btn btn-default" href="/Home/About">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Contacts</h2>
+        <address>
+            Plovdiv<br />
+            Betoven 6<br />
+            <abbr title="Phone">P:</abbr>
+            08888888888
+        </address>
+
+        <address>
+            <strong>Support:</strong>   <a href="mailto:Support@example.com">pd-medicine@medicine.com</a><br />
+            <strong>Marketing:</strong> <a href="mailto:Doctors@example.com">doctors@medicine.com</a>
+        </address>
+        <p><a class="btn btn-default" href="~/Home/Contact">View more &raquo;</a></p>
+    </div>
+</div>

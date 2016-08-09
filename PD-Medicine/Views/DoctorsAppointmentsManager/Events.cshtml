@@ -1,0 +1,48 @@
+﻿@using DataAccess.Entity;
+
+@model IEnumerable<DataAccess.Repository.AppointmentsRepository>
+
+@{
+    ViewBag.Title = "Events";
+}
+
+<h2>Events - Approved appointments</h2>
+
+<br />
+<table class="table table-striped">
+    <tr>
+        <td>Patient Username</td>
+        <td>Symptoms</td>
+        <td>Date and Hour</td>
+        <td>Status</td>
+        <td>Action</td>
+    </tr>
+    @foreach (var item in (IEnumerable<AppointmentEntity>)ViewData["appointments"])
+    {
+        var edit = "/DoctorsAppointmentsManager/EditAppointment?id=" + item.Id;
+        var delete = "/DoctorsAppointmentsManager/DeleteAppointment?id=" + item.Id;
+
+        if (item.Status == true)
+        {
+            <tr>
+                <td>
+                    @item.Username
+                </td>
+                <td>
+                    @item.Symptoms
+                </td>
+                <td>
+                    @item.DateHour
+                </td>
+                <td>
+                    @item.Status
+                </td>
+                <td>
+                    <a href="@edit" class="btn btn-success">Edit</a> |
+                    <a href="@delete" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    }
+
+</table>

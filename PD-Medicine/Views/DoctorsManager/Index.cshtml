@@ -1,0 +1,59 @@
+﻿@using DataAccess.Entity;
+
+@model IEnumerable<DataAccess.Repository.DoctorsRepository>
+
+@{
+    ViewBag.Title = "Doctors Manager";
+}
+
+<h2>Doctors Manager</h2>
+<hr />
+<p>
+    @Html.ActionLink("Create New Doctor", "EditDoctor", "DoctorsManager", new { @class = "btn btn btn-success" })
+</p>
+<table class="table table-striped">
+    <tr>
+        <td>ID</td>
+        <td>Username</td>
+        <td>Full Name</td>
+        <td>Doctor Type</td>
+        <td>Description</td>
+        <td>Address</td>
+        <td>Phone</td>
+        <td>Action</td>
+    </tr>
+    @foreach (var item in (IEnumerable<DoctorEntity>)ViewData["doctors"])
+    {
+        var edit = "/DoctorsManager/EditDoctor?id=" + item.Id;
+        var delete = "/DoctorsManager/DeleteDoctor?id=" + item.Id;
+
+        <tr>
+            <td>
+                @item.Id
+            </td>
+            <td>
+                @item.Username
+            </td>
+            <td>
+                @item.FirstName @item.LastName
+            </td>
+            <td>
+                @item.DoctorType
+            </td>
+            <td>
+                @item.Description
+            </td>
+            <td>
+                @item.Address
+            </td>
+            <td>
+                @item.Phone
+            </td>
+            <td>
+                <a href="@edit" class="btn btn-success">Edit</a> |
+                <a href="@delete" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
