@@ -1,0 +1,88 @@
+﻿@model WebTaskManagerEfDb.ViewModels.Tasks.TasksListVM
+
+@model IEnumerable<DataAccess.Repository.AppointmentsRepository>
+
+@{
+    ViewBag.Title = "Tasks";
+}
+
+<h2>Appointments Manager</h2>
+<hr />
+<h3>Confirm appointments</h3>
+<p>
+    @ViewBag.Title
+</p>
+<table class="table table-striped">
+    <tr>
+        <td>User</td>
+        <td>Doctor</td>
+        <td>Symptoms</td>
+        <td>Date and Hour</td>
+        <td>Status</td>
+        <td>Action</td>
+    </tr>
+    @fo = Html.ActionLink("Create new tasks", "Edit", "TaskManagerController", new { @class = "btn btn-success" <tr>
+            <td>
+                @item.Username
+            </td>
+            <td>
+                @item.DoctorUsername
+            </td>
+            <td>
+                @item.Symptoms
+            </td>
+            <td>
+                @item.DateHour
+            </td>
+            <td>
+                @item.Status
+            </td>
+            <td>
+                <a href="@edit" class="btn btn-success">Edit</a> |
+                <a href="@Html.Partial("_PagingPartial", Model.Pager)" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<h3>Pending or Rejected appointments</h3>
+
+<table class="table table-striped">
+    <tr>
+        <td>User</td>
+        <td>Doctor</td>
+        <td>Symptoms</td>
+        <td>Date and Hour</td>
+        <td>Status</td>
+        <td>Action</td>
+    </tr>
+    @foreach (var item in Model.Items)
+    {
+        
+
+            <tr>
+                <td>
+                    @item.Username
+                </td>
+                <td>
+                    @item.DoctorUsername
+                </td>
+                <td>
+                    @item.Symptoms
+                </td>
+                <td>
+                    @item.DateHour
+                </td>
+                <td>
+                    @item.Status
+                </td>
+                <td>
+                    <a href="@edit" class="btn btn-success">Edit</a> |
+                    <a href="@delete" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    }
+
+</table>

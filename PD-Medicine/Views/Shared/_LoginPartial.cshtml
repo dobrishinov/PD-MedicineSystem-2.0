@@ -9,14 +9,14 @@
         if (PD_Medicine.Models.AuthenticationManager.LoggedUser.UserStatus == false)
         {
             <li style="float: left; text-decoration: none; color: black;"><a href="">Welcome @PD_Medicine.Models.AuthenticationManager.LoggedUser.Username</a></li>
-            <li>@Html.ActionLink("Add appointment", "EditAppointment", "AppointmentsManager")</li>
+            <li>@Html.ActionLink("Add appointment", "Edit", "AppointmentsManager")</li>
             <li>@Html.ActionLink("View appointments", "", "AppointmentsManager")</li>
             <li style="float: left; width: 150px; text-decoration: none; color: black;"><a href="/Home/Logout">Log out</a></li>
         }
         else if (PD_Medicine.Models.AuthenticationManager.LoggedUser.Username == "admin")
         {
             <li style="float: left; text-decoration: none; color: black;"><a href="">Welcome @PD_Medicine.Models.AuthenticationManager.LoggedUser.Username</a></li>
-            <li>@Html.ActionLink("Add Doctors", "EditDoctor", "DoctorsManager")</li>
+            <li>@Html.ActionLink("Add Doctors", "Edit", "DoctorsManager")</li>
             <li>@Html.ActionLink("View Doctors", "", "DoctorsManager")</li>
             <li style="float: left; width: 150px; text-decoration: none; color: black;"><a href="/Home/Logout">Log out</a></li>
         }

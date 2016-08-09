@@ -1,46 +1,76 @@
-﻿@using DataAccess.Entity;
+﻿@model PD_Medicine.ViewModels.Appointments.AppointmentsEditVM
 
-.
 @{
-    ViewBag.Title = "Add/Edit Appointment";
+    ViewBag.Title = "EditAppointment";
 }
 
-<h1 style="font-size:26px;">Add/Edit Appointment</h1>
-<hr />
-
-            @{
-                AppointmentEntity appointment = (AppointmentEntity)ViewData["appointment"];
-            }
-            <form action="/AppointmentsManager/EditAppointment" method="post" class="form-group">
-                <input type="hidden" name="Id" value="@appointment.Id" />
-                <input type="hidden" name="Status" value="False" />
-                <input type="hidden" name="UserId" value="@appointment.UserId" />
-                <input type="hidden" name="Username" value="@appointment.Username" />
+<h2>EditAppointment</h2>
 
 
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>AppointmentsEditVM</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
 
-                <div class="form-group">
-                    <label for="symptoms">Symptoms</label>
-                    <input type="text" class="form-control" name="Symptoms" value="@appointment.Symptoms" placeholder="Add your symptoms" required/>
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DoctorId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DoctorId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DoctorId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Symptoms, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Symptoms, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Symptoms, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateHour, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateHour, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateHour, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Status)
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
                 </div>
+            </div>
+        </div>
 
-                <div class="form-group">
-                    <label for="doctors">Select Doctor</label>
-                    <select class="form-control" name="doctor">
-                        @{
-                            foreach (var item in ((IEnumerable<SelectListItem>)ViewData["selectList"]))
-                            {
-                                <option value="@item.Value">@item.Text</option>
-                            }
-                        }
-                    </select>
-                </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
 
-                <div class="form-group">
-                    <label for="dateHour">Date and Hour</label>
-                    <input type="text" class="form-control" id="datetimepicker" name="DateHour" value="@appointment.DateHour" placeholder="Choose Day and Hour" required>
-                </div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 
-                <input class="btn btn-success" type="submit" value="Save" />&nbsp;<a class="btn btn-danger" href="/AppointmentsManager/Index">Cancel</a>
-
-            </form>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

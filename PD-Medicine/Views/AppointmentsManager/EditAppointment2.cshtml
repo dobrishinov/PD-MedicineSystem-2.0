@@ -1,0 +1,46 @@
+﻿@using DataAccess.Entity;
+
+.
+@{
+    ViewBag.Title = "Add/Edit Appointment";
+}
+
+<h1 style="font-size:26px;">Add/Edit Appointment</h1>
+<hr />
+
+            @{
+                AppointmentEntity appointment = (AppointmentEntity)ViewData["appointment"];
+            }
+            <form action="/AppointmentsManager/EditAppointment" method="post" class="form-group">
+                <input type="hidden" name="Id" value="@appointment.Id" />
+                <input type="hidden" name="Status" value="False" />
+                <input type="hidden" name="UserId" value="@appointment.UserId" />
+                <input type="hidden" name="Username" value="@appointment.Username" />
+
+
+
+                <div class="form-group">
+                    <label for="symptoms">Symptoms</label>
+                    <input type="text" class="form-control" name="Symptoms" value="@appointment.Symptoms" placeholder="Add your symptoms" required/>
+                </div>
+
+                <div class="form-group">
+                    <label for="doctors">Select Doctor</label>
+                    <select class="form-control" name="doctor">
+                        @{
+                            foreach (var item in ((IEnumerable<SelectListItem>)ViewData["selectList"]))
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="dateHour">Date and Hour</label>
+                    <input type="text" class="form-control" id="datetimepicker" name="DateHour" value="@appointment.DateHour" placeholder="Choose Day and Hour" required>
+                </div>
+
+                <input class="btn btn-success" type="submit" value="Save" />&nbsp;<a class="btn btn-danger" href="/AppointmentsManager/Index">Cancel</a>
+
+            </form>
