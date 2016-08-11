@@ -8,5 +8,6 @@
 
     public class AppointmentsListVM : BaseListVM<AppointmentEntity>
     {
+        //public List<DoctorEntity> Doctors { get; set; }
     }
 }

@@ -16,5 +16,9 @@
         public DbSet<AdminEntity> Admins { get; set; }
 
         public System.Data.Entity.DbSet<PD_Medicine.ViewModels.Appointments.AppointmentsEditVM> AppointmentsEditVMs { get; set; }
+
+        public System.Data.Entity.DbSet<PD_Medicine.ViewModels.Doctors.DoctorsEditVM> DoctorsEditVMs { get; set; }
+
+        public System.Data.Entity.DbSet<PD_Medicine.ViewModels.DoctorAppointments.DoctorAppointmentsEditVM> DoctorAppointmentsEditVMs { get; set; }
     }
 }

@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace PD_Medicine.ViewModels.Doctors
+﻿namespace PD_Medicine.ViewModels.Doctors
 {
-    public class DoctorsListVM
+    using DataAccess.Entity;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web;
+
+    public class DoctorsListVM : BaseListVM<DoctorEntity>
     {
+
     }
 }

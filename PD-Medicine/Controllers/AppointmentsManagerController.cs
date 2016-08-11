@@ -4,6 +4,7 @@
     using DataAccess.Repository;
     using PD_Medicine.Controllers;
     using PD_Medicine.Models;
+    using PD_Medicine.ViewModels;
     using PD_Medicine.ViewModels.Appointments;
     using System;
     using System.Collections.Generic;
@@ -17,17 +18,30 @@
             return new AppointmentsRepository();
         }
 
-        public override ActionResult Redirect(AppointmentEntity entity)
+        public override ActionResult RedirectTo(AppointmentEntity entity)
         {
             return RedirectToAction("Index", "AppointmentsManager", new { id = entity.Id });
         }
 
+        public override void PopulateIndex(AppointmentsListVM model)
+        {
+            string action = this.ControllerContext.RouteData.Values["action"].ToString();
+            string controller = this.ControllerContext.RouteData.Values["controller"].ToString();
+            //t => t.CreatorId == AuthenticationManager.LoggedUser.Id|| t.ResponsibleUsers == AuthenticationManager.LoggedUser.Id
+
+            model.Items = Repository.GetAll().ToList();
+            //model.Pager = new Pager(Repository.GetAll(CreateFilter()).Count(), model.Pager.CurrentPage, "Pager.", action, controller, model.Pager.PageSize);
+        }
+
         public override void PopulateEntity(AppointmentEntity entity, AppointmentsEditVM model)
         {
+            DoctorsRepository repo = new DoctorsRepository();
             if (entity.UserId<=0)
             {
                 entity.UserId = AuthenticationManager.LoggedUser.Id;
+                entity.Username = AuthenticationManager.LoggedUser.Username;
                 entity.DoctorId = model.DoctorId;
+                entity.DoctorUsername = repo.GetById(entity.DoctorId).Username;
                 entity.Symptoms = model.Symptoms;
                 entity.DateHour = DateTime.Now;
                 entity.Status = false;
@@ -35,6 +49,7 @@
             else
             {
                 entity.UserId = model.UserId;
+                entity.Username = AuthenticationManager.LoggedUser.Username;
                 entity.DoctorId = model.DoctorId;
                 entity.Symptoms = model.Symptoms;
                 entity.DateHour = DateTime.Now;

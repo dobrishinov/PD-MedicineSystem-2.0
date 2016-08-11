@@ -1,14 +1,16 @@
 ﻿@model PD_Medicine.ViewModels.Appointments.AppointmentsListVM
 
+<h2>Appointments Manager</h2>
+<hr />
+@Html.ActionLink("Create new tasks", "Edit", "TaskManagerController", new { @class = "btn btn-success" })
 
-<h2>Appointments</h2>
-
+<h3>Confirm appointments</h3>
 <p>
-    @Html.ActionLink("Create new Appointment", "Edit", new {})
+    @ViewBag.Title
 </p>
 
-
 <table class="table table-hover sortable">
+
     <tr>
         <td>User</td>
         <td>Doctor</td>
@@ -20,6 +22,8 @@
 
     @foreach (var item in Model.Items)
     {
+        if (item.Status == true)
+        {
         <tr>
             <td>
                 @item.Username
@@ -40,9 +44,47 @@
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
             </td>
         </tr>
+        }
     }
 </table>
 
-@*<div>
-    @Html.Partial("_PagingPartial", Model.Pager)
-</div>*@
+<h3>Pending or Rejected appointments</h3>
+
+<table class="table table-striped">
+    <tr>
+        <td>User</td>
+        <td>Doctor</td>
+        <td>Symptoms</td>
+        <td>Date and Hour</td>
+        <td>Status</td>
+        <td>Action</td>
+    </tr>
+    @foreach (var item in Model.Items)
+    {
+        if (item.Status == false)
+        {
+        <tr>
+            <td>
+                @item.Username
+            </td>
+            <td>
+                @item.DoctorUsername
+            </td>
+            <td>
+                @item.Symptoms
+            </td>
+            <td>
+                @item.DateHour
+            </td>
+            <td>
+                @item.Status
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+        }
+    }
+
+</table>

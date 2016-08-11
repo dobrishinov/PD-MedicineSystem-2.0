@@ -193,16 +193,20 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Registration\Register.cshtml" />
-    <Content Include="Views\DoctorsManager\EditDoctor.cshtml" />
+    <Content Include="Views\DoctorsManager\EditDoctor2.cshtml" />
     <Content Include="Views\DoctorsManager\Index.cshtml" />
     <Content Include="Views\AppointmentsManager\OldIndex.cshtml" />
     <Content Include="Views\AppointmentsManager\EditAppointment2.cshtml" />
     <Content Include="Views\DoctorsAppointmentsManager\Index.cshtml" />
-    <Content Include="Views\DoctorsAppointmentsManager\EditAppointment.cshtml" />
+    <Content Include="Views\DoctorsAppointmentsManager\EditAppointment2.cshtml" />
     <Content Include="Views\DoctorsAppointmentsManager\Events.cshtml" />
     <Content Include="Views\AppointmentsManager\EditAppointment.cshtml" />
     <Content Include="Views\AppointmentsManager\Index.cshtml" />
     <Content Include="Views\AppointmentsManager\Edit.cshtml" />
+    <Content Include="Views\DoctorsManager\Edit.cshtml" />
+    <Content Include="Views\DoctorsAppointmentsManager\Edit2.cshtml" />
+    <Content Include="Views\DoctorsAppointmentsManager\Edit.cshtml" />
+    <Content Include="Views\Shared\_PagingPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -22,13 +22,23 @@
             this.Repository = CreateRepository();
         }
 
-        private BaseRepository<T> Repository = null;
+        protected BaseRepository<T> Repository = null;
         public abstract BaseRepository<T> CreateRepository();
         public abstract void PopulateModel(EVM model, T entity);
         public abstract void PopulateEntity(T entity, EVM model);
         protected Expression<Func<T, bool>> Filter { get; set; }
 
-        public virtual ActionResult Redirect(T entity)
+        public virtual void PopulateIndex(IVM model)
+        {
+            string action = this.ControllerContext.RouteData.Values["action"].ToString();
+            string controller = this.ControllerContext.RouteData.Values["controller"].ToString();
+            //t => t.CreatorId == AuthenticationManager.LoggedUser.Id|| t.ResponsibleUsers == AuthenticationManager.LoggedUser.Id
+
+            model.Items = Repository.GetAll(CreateFilter(), model.Pager.CurrentPage, model.Pager.PageSize).ToList();
+            model.Pager = new Pager(Repository.GetAll(CreateFilter()).Count(), model.Pager.CurrentPage, "Pager.", action, controller, model.Pager.PageSize);
+        }
+
+        public virtual ActionResult RedirectTo(T entity)
         {
             return RedirectToAction("Index");
         }
@@ -48,12 +58,7 @@
             model.Pager = new Pager();
             TryUpdateModel(model);
 
-            string action = this.ControllerContext.RouteData.Values["action"].ToString();
-            string controller = this.ControllerContext.RouteData.Values["controller"].ToString();
-            //t => t.CreatorId == AuthenticationManager.LoggedUser.Id|| t.ResponsibleUsers == AuthenticationManager.LoggedUser.Id
-
-            model.Items = Repository.GetAll(CreateFilter(), model.Pager.CurrentPage, model.Pager.PageSize).ToList();
-            model.Pager = new Pager(Repository.GetAll(CreateFilter()).Count(), model.Pager.CurrentPage, "Pager.", action, controller, model.Pager.PageSize);
+            PopulateIndex(model);
 
             return View(model);
         }
@@ -79,12 +84,14 @@
 
             EVM model = new EVM();
             TryUpdateModel(model);
-
-            T entity = (model.Id <= 0) ? new T() : Repository.GetById(model.Id);
-            PopulateEntity(entity, model);
-            Repository.Save(entity);
-
-            return Redirect(entity);
+            if (ModelState.IsValid)
+            {
+                T entity = (model.Id <= 0) ? new T() : Repository.GetById(model.Id);
+                PopulateEntity(entity, model);
+                Repository.Save(entity);
+                return RedirectTo(entity);
+            }
+            return View(model);
 
         }
 
@@ -97,7 +104,7 @@
             T entity = Repository.GetById(id);
             Repository.Delete(entity);
 
-            return Redirect(entity);
+            return RedirectTo(entity);
         }
     }
 }
